@@ -6,7 +6,9 @@
 package labpaoo_cr21b_l3;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 /**
@@ -26,12 +28,18 @@ public class LabPaoo_CR21B_L3 {
 //        String sirCitit = s.nextLine();        
 //        System.out.println("Sirul citit de la tastatura este: " + sirCitit);
         FileInputStream inputStream = null;
+        FileOutputStream outputStream = null;
         try
         {
             inputStream = new FileInputStream("/home/catalin/test_1.txt");
             Scanner fileScanner = new Scanner(inputStream);
-            String readLine = fileScanner.nextLine();  
+            outputStream = new FileOutputStream("/home/catalin/test.txt");
+            PrintWriter writer = new PrintWriter(outputStream);
+            
+            String readLine = fileScanner.nextLine();                          
             System.out.println("Am citit: " +  readLine);
+            writer.print(readLine);
+            writer.flush();
         }
         catch (FileNotFoundException e)
         {
@@ -55,6 +63,8 @@ public class LabPaoo_CR21B_L3 {
             {
                 if (inputStream != null)
                     inputStream.close();
+                if (outputStream != null)
+                    outputStream.close();
             }
             catch(IOException e)
             {
